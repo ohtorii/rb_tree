@@ -1,0 +1,64 @@
+/*赤黒木を表示する秀丸マクロ
+
+（動作）
+	・テキストの各１行が赤黒木の１ノードになります。
+	・文字列で登録します。（数値も文字列になります）
+	・選択があればその範囲が対象となります、選択が無ければテキスト全体が対象にな
+	  ります。
+	・結果は新しいウインドウへ表示されます。
+
+（注意）
+	オレオレSTLのデバッグが目的だったので、使い勝手は求めないで下さいね。
+
+（日記）
+	http://d.hatena.ne.jp/ohtorii/
+*/
+
+$g_exe_filename = currentmacrodirectory + "\\rb_tree.exe";
+
+
+
+
+call Main;
+endmacro;
+
+
+Main:
+	if(! existfile($g_exe_filename)){
+		message("実行ファイルが見つかりません。\n" +
+				"ファイル名：" + $g_exe_filename);
+		return false;
+	}
+	
+	menu "set<std::string>", "multiset<std::string>";
+	if(0 == result){
+		return ;
+	}else if(1==result){
+		call Run "0";
+	}else{
+		call Run "1";
+	}
+	
+	return ;
+
+
+Run:
+	$$mode = $$1;
+	$$arg = $g_exe_filename + " " + $$mode;
+	runex $$arg
+		, 0 			//sync	  0:async 1:sync
+		, 1, "" 		//stdin   0:none 1:auto 2:file 3:(reserve) 4:all 5:select
+		, 4, "" 		//stdout  0:none 1:auto 2:file 3:add file  4:new 5:insert 6:replace
+		, 0, "" 		//stderr  0:none 1:=out 2:file 3:add file  4:new 5:insert 6:replace
+		, 0, "" 		//folder  0:none 1:current 2:specify 3:(reserve) 4:exe's folder
+		, 2 			//show	  0:auto 1:show 2:hide
+		, 1 			//nodraw  0:draw 1:no draw
+		, 0 			//unicode 0:ansi 2:unicode
+		;
+	##ret = result;
+	if(false == ##ret){
+		message("runexで失敗");
+		return false;
+	}
+	return result;
+
