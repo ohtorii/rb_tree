@@ -2,7 +2,7 @@
 
 （動作）
 	・テキストの各１行が赤黒木の１ノードになります。
-	・文字列で登録します。（数値も文字列になります）
+	・赤黒木に文字列(std::string)で登録します。（数値も文字列になります）
 	・選択があればその範囲が対象となります、選択が無ければテキスト全体が対象にな
 	  ります。
 	・結果は新しいウインドウへ表示されます。
@@ -29,7 +29,7 @@ Main:
 				"ファイル名：" + $g_exe_filename);
 		return false;
 	}
-	
+
 	menu "set<std::string>", "multiset<std::string>";
 	if(0 == result){
 		return ;
@@ -38,7 +38,7 @@ Main:
 	}else{
 		call Run "1";
 	}
-	
+
 	return ;
 
 
