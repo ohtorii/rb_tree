@@ -14,7 +14,7 @@
 	http://d.hatena.ne.jp/ohtorii/
 */
 
-$g_exe_filename = currentmacrodirectory + "\\rb_tree.exe";
+$g_exe_filename = "rb_tree.exe";
 
 
 
@@ -44,7 +44,7 @@ Main:
 
 Run:
 	$$mode = $$1;
-	$$arg = "\"" + $g_exe_filename + "\" " + $$mode;
+	$$arg = $g_exe_filename + " " + $$mode;
 	runex $$arg
 		, 0 			//sync	  0:async 1:sync
 		, 1, "" 		//stdin   0:none 1:auto 2:file 3:(reserve) 4:all 5:select
