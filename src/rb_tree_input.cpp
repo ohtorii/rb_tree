@@ -16,7 +16,7 @@ bool  RB_IsEof(){
 
 char* RB_GetCin(){
 	std::string tmp;
-	std::cin >> tmp;
+	std::getline(std::cin, tmp);
 	char *buf = (char*)malloc((tmp.size()+1) * sizeof(std::string::value_type));
 	strcpy(buf, tmp.c_str());
 	return buf;
